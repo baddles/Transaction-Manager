@@ -1,0 +1,6 @@
+// Please rename this file to "API_KEY.json" and remove this line for this configuration file to work!
+{
+    "random.org": {
+        "apiKey": ""
+    }
+}

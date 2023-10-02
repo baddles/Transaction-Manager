@@ -1,0 +1,19 @@
+{
+    "random.org": {
+        "invoke": "https://api.random.org/json-rpc/4/invoke"
+    },
+    "imgur.com": {
+        "login": {
+            "authorize": "https://api.imgur.com/oauth2/authorize"
+        }
+    },
+    "api": {
+        "LoginAuth": {
+            "Authorize": "/api/LoginAuth/Authorize"
+        },
+        "GitHubOauth": {
+            "info": "/api/GitHubOauth/info",
+            "authenticate": "/api/GitHubOauth/authenticate"
+        }
+    }
+}

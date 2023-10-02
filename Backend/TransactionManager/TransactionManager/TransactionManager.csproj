@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.11" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.11" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="BouncyCastle" Version="1.8.9" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Service\" />
+    <None Remove="Facade\" />
+    <None Remove="Controllers\Login\" />
+    <None Remove="Service\Login\" />
+    <None Remove="Interfaces\" />
+    <None Remove="Models\" />
+    <None Remove="Models\APIModels\" />
+    <None Remove="Models\DBModels\" />
+    <None Remove="Models\APIModels\Login\" />
+    <None Remove="Repository\" />
+    <None Remove="Facade\Login\" />
+    <None Remove="Service\Login\Authentication\" />
+    <None Remove="Service\Login\Authorization\" />
+    <None Remove="Models\DBModels\Tables\" />
+    <None Remove="Controllers\Logs\" />
+    <None Remove="Service\Settings\" />
+    <None Remove="Service\Settings\Timezone\" />
+    <None Remove="Service\Settings\Logs\" />
+    <None Remove="Models\APIModels\Login\Authentication\" />
+    <None Remove="Models\APIModels\Login\Authorization\" />
+    <None Remove="Models\APIModels\Login\Authorization\TokenResponseModel\" />
+    <None Remove="Models\APIModels\Login\Authentication\External\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Service\" />
+    <Folder Include="Facade\" />
+    <Folder Include="Controllers\Login\" />
+    <Folder Include="Service\Login\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Models\" />
+    <Folder Include="Models\APIModels\" />
+    <Folder Include="Models\DBModels\" />
+    <Folder Include="Models\APIModels\Login\" />
+    <Folder Include="Repository\" />
+    <Folder Include="Facade\Login\" />
+    <Folder Include="Service\Login\Authentication\" />
+    <Folder Include="Service\Login\Authorization\" />
+    <Folder Include="Models\DBModels\Tables\" />
+    <Folder Include="Controllers\Logs\" />
+    <Folder Include="Service\Settings\" />
+    <Folder Include="Service\Settings\Timezone\" />
+    <Folder Include="Service\Settings\Logs\" />
+    <Folder Include="Models\APIModels\Login\Authentication\" />
+    <Folder Include="Models\APIModels\Login\Authorization\" />
+    <Folder Include="Models\APIModels\Login\Authorization\TokenResponseModel\" />
+    <Folder Include="Models\APIModels\Login\Authentication\External\" />
+  </ItemGroup>
+</Project>

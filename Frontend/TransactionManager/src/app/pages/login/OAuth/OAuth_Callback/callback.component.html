@@ -1,0 +1,14 @@
+<div class="center-wrapper">
+    <div class="center-box">
+        <div class="title">
+            <p class="title-top">Transaction</p>
+            <p class="title-bottom">Manager</p>
+        </div>
+        <div class="content">
+            <div [ngClass]="{'loading-spinner': matched, 'loading-spinner__red': !matched, 'loading-spinner__green': matched && finished}">
+                <div [ngClass]="{'cross': !matched, 'checked': matched && finished}"></div>
+            </div>
+            <p>{{status}}</p>
+        </div>
+    </div>
+</div>

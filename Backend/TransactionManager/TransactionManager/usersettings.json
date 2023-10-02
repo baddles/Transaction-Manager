@@ -1,0 +1,26 @@
+﻿{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=transaction-manager.tailf6119.ts.net,3306;Database=transaction_manager_db;User=transaction-manager;Password=BadguysNguyen0612;"
+  },
+  "github.com": {
+    "redirect_uri": "http://transaction-manager.tailf6119.ts.net:4200/callback",
+    //  "client_id": "0c6a4987ca4f59d7626d",
+    "client_id": "f11029b7a64bbf0",
+    //"client_secret": "3acdd9027a2dd805b19369c5755a9f1b2685ffa4"
+    "client_secret": "ddd060143b892cc7502fb99bc6f89dafd54de2cd"
+  },
+  "imgur.com": {
+    "api_path": "https://api.imgur.com/oauth2/token",
+    "redirect_uri": "http://transaction-manager.tailf6119.ts.net:4200/callback",
+    "client_id": "f11029b7a64bbf0",
+    "client_secret": "ddd060143b892cc7502fb99bc6f89dafd54de2cd",
+    "grant_type": "authorization_code"
+  },
+  "jwt": {
+    "Issuer": "http://localhost:5170",
+    "Audience": "http://transaction-manager.tailf6119.ts.net:4200",
+    "Secret": "1oNNKfAAtyfcER8Fg38UIGRxbeUr5U5X",
+    "token_type":  "Bearer"
+  }
+}
+

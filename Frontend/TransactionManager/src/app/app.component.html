@@ -1,0 +1,8 @@
+<ng-template *ngIf="!(currentRoute === 'login' || currentRoute === 'callback' || currentRoute === ''); then main else loginBlock">
+</ng-template>
+<ng-template #main>
+    <router-outlet></router-outlet>
+</ng-template>
+<ng-template #loginBlock>
+    <router-outlet></router-outlet>
+</ng-template>

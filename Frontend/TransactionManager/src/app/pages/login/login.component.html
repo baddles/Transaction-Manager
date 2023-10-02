@@ -1,0 +1,27 @@
+<div class="center-wrapper">
+    <div class="center-box" #centerbox>
+        <div class="title" #title>
+            <p class="title-top">Transaction</p>
+            <p class="title-bottom">Manager</p>
+        </div>
+        <div class="content">
+            <form class="login-form">
+                <div class="form-group">
+                    <mat-label class="label">Username:</mat-label>
+                    <input matInput type="text" class="input" name="username" required [(ngModel)]="username">
+                </div>
+                <div class="form-group">
+                    <mat-label class="label">Password:</mat-label>
+                    <input matInput type="password" class="input input__password" name="password" [(ngModel)]="password" required>
+                </div>
+                <div class="btn-container">
+                    <button mat-raised-button (click)="login()" class="btn primary">Login</button>
+                </div>
+            </form>
+            
+        </div>
+        <div class="status-container">
+            <p class="status" *ngIf="status || status.length > 0 || status !== null">{{status}}</p>
+        </div>
+    </div>
+  </div>
