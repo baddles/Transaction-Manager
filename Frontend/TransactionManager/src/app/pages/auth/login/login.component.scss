@@ -117,6 +117,17 @@ body {
     justify-content: center;
     align-self: center;
     align-items: center;
+    p, .loading-spinner, .loading-spinner__red, .loading-spinner__green{
+        text-align: center;
+        align-self: flex-start;
+    };
+    .loading-spinner, .loading-spinner__red, .loading-spinner__green {
+        position: absolute;
+        margin-top: 16px;
+    }
+    p {
+        margin-top: 54px;
+    }
 }
 .status {
     @include font;

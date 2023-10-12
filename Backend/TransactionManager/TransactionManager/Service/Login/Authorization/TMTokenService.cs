@@ -1,6 +1,6 @@
 ﻿using System;
 using Org.BouncyCastle.Asn1.Tsp;
-using TransactionManager.Models.APIModels.Login.Authorization.TokenResponseModel;
+using TransactionManager.Models.APIModels.Login;
 using TransactionManager.Models.DBModels;
 using TransactionManager.Models.DBModels.Tables;
 using TransactionManager.Repository;
@@ -27,7 +27,7 @@ namespace TransactionManager.Service.Login.Authorization
             }
             return true;
         }
-        public TMTokenResponseModel generateToken(string username, DateTime api_execution_time, Guid guid)
+        public async Task<TokenBase> generateToken(string username, DateTime api_execution_time, Guid guid)
         {
             if (this._dbContext == null)
             {
@@ -37,14 +37,14 @@ namespace TransactionManager.Service.Login.Authorization
             {
                 guid = Guid.NewGuid();
             }
-            (string refresh_token, DateTime expiration_time) = saveRefreshToken(username, guid, api_execution_time);
-            string access_token = generateJwtToken(username, expiration_time, guid);
-            return new TMTokenResponseModel(access_token, this._config["jwt:token_type"], guid.ToString(), expiration_time);
+            (string refresh_token, DateTime expiration_time) = await Task.Run(() => saveRefreshToken(username, guid, api_execution_time));
+            string access_token = await Task.Run(() => generateJwtToken(username, expiration_time, guid));
+            return new TokenBase(access_token, this._config["jwt:token_type"], guid.ToString(), expiration_time);
         }
         private (string, DateTime) saveRefreshToken(string username, Guid guid, DateTime currentUTC)
         {
             TimezoneService tzService = new TimezoneService(this._dbContext);
-            string userTZ = tzService.getUserTimezone(username);
+            string userTZ = Task.Run(() => tzService.getUserTimezone(username)).Result;
             DateTime timeout_at = determineExpirationTime(currentUTC, userTZ);
             Token t = new Token();
             t.username = username;

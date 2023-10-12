@@ -8,12 +8,10 @@
         }
     },
     "api": {
-        "LoginAuth": {
-            "Authorize": "/api/LoginAuth/Authorize"
-        },
-        "GitHubOauth": {
-            "info": "/api/GitHubOauth/info",
-            "authenticate": "/api/GitHubOauth/authenticate"
+        "auth": {
+            "Init": "/api/auth/initialize",
+            "Login": "/api/auth/login",
+            "Refresh": "/api/auth/refresh"
         }
     }
 }

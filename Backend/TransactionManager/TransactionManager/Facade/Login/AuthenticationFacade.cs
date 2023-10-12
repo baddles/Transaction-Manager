@@ -10,12 +10,13 @@ namespace TransactionManager.Facade.Login
 	{
 		public static InitializeResponseModel Initialize(string state, IConfiguration usersettingsconfig)
 		{
-            InitializeResponseModel responseModel = new InitializeResponseModel();
-            if (string.IsNullOrEmpty(responseModel.client_id = usersettingsconfig["imgur.com:client_id"]))
+            string? client_id = null;
+            if (string.IsNullOrEmpty(client_id = usersettingsconfig["imgur.com:client_id"]))
             {
                 throw new InvalidOperationException("imgur.com Client_ID not initialized/found!");
             }
-            responseModel.public_key = KeyManagementService.initializeInstance(state);
+            byte[] public_key = KeyManagementService.initializeInstance(state);
+            InitializeResponseModel responseModel = new InitializeResponseModel(client_id, public_key);
 			return responseModel;
         }
         public static bool CheckPassword(DatabaseContext dbContext, string state, string username, string password)

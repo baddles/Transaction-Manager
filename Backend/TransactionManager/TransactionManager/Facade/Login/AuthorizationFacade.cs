@@ -1,34 +1,21 @@
 ﻿using System;
-using TransactionManager.Models.APIModels.Login.Authorization.TokenResponseModel;
 using TransactionManager.Models.DBModels;
 using TransactionManager.Service.Login.Authorization;
 using TransactionManager.Models.APIModels.Login;
+using Microsoft.EntityFrameworkCore;
+using TransactionManager.Service;
 
 namespace TransactionManager.Facade.Login
 {
 	public static class AuthorizationFacade
 	{
-		private static ImgurAPIResponseModel getImgurToken(string code, IConfiguration usersettingsconfig)
+		public static async Task<LoginResponseModel> getAuthorizationToken(string username, DateTime apiExecutionTime, DatabaseContext _dbContext, IConfiguration _config)
 		{
-			string client_id = usersettingsconfig["imgur.com:client_id"];
-            string client_secret = "";
-            if (string.IsNullOrEmpty(client_secret = usersettingsconfig["imgur.com:client_secret"]))
-            {
-                throw new InvalidOperationException("imgur.com client_secret not initialized/found!");
-            }
-			ImgurOauth2Service imgurAuthenticationService = new ImgurOauth2Service(usersettingsconfig["imgur.com:api_path"], client_id, client_secret, usersettingsconfig["imgur.com:grant_type"]);
-			return imgurAuthenticationService.generateAccessToken(code);
-		}
-		private static TMTokenResponseModel getTransactionManagerToken(string username, DateTime execution_time, DatabaseContext dbContext, IConfiguration usersettingsconfig)
-		{
-			TransactionManagerTokenService tmService = new TransactionManagerTokenService(dbContext, usersettingsconfig);
-			return tmService.generateToken(username,execution_time, Guid.NewGuid());
-		}
-		public static LoginResponseModel getAuthorizationToken(string username, string code, DatabaseContext _dbContext, IConfiguration _config)
-		{
-			DateTime exec_time = DateTime.UtcNow;
-			LoginResponseModel responseModel = new LoginResponseModel(getImgurToken(code, _config), getTransactionManagerToken(username, exec_time, _dbContext, _config));
-			return responseModel;
+            TransactionManagerTokenService tmService = new TransactionManagerTokenService(_dbContext, _config);
+			TimezoneService tzService = new TimezoneService(_dbContext);
+            TokenBase token = await tmService.generateToken(username, apiExecutionTime, Guid.NewGuid());
+			string timezone = await tzService.getUserTimezone(username);
+			return new LoginResponseModel(token.access_token, token.token_type, token.refresh_token, token.expires_at, timezone);
 		}
 	}
 }

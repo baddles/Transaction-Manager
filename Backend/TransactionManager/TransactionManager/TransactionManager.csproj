@@ -42,10 +42,6 @@
     <None Remove="Service\Settings\" />
     <None Remove="Service\Settings\Timezone\" />
     <None Remove="Service\Settings\Logs\" />
-    <None Remove="Models\APIModels\Login\Authentication\" />
-    <None Remove="Models\APIModels\Login\Authorization\" />
-    <None Remove="Models\APIModels\Login\Authorization\TokenResponseModel\" />
-    <None Remove="Models\APIModels\Login\Authentication\External\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Service\" />
@@ -66,9 +62,5 @@
     <Folder Include="Service\Settings\" />
     <Folder Include="Service\Settings\Timezone\" />
     <Folder Include="Service\Settings\Logs\" />
-    <Folder Include="Models\APIModels\Login\Authentication\" />
-    <Folder Include="Models\APIModels\Login\Authorization\" />
-    <Folder Include="Models\APIModels\Login\Authorization\TokenResponseModel\" />
-    <Folder Include="Models\APIModels\Login\Authentication\External\" />
   </ItemGroup>
 </Project>

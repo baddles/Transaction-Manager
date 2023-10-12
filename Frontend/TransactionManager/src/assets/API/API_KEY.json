@@ -1,5 +1,9 @@
 {
     "random.org": {
         "apiKey": "51a816c1-a346-497a-aa17-15af08392528"
+    },
+    "api.imgur.com": {
+        "client_id": "f11029b7a64bbf0",
+        "client_secret": "ddd060143b892cc7502fb99bc6f89dafd54de2cd"
     }
 }

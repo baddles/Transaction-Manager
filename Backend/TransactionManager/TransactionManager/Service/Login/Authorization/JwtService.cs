@@ -2,7 +2,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.IdentityModel.Tokens;
 using Microsoft.IdentityModel.Tokens;
-using TransactionManager.Models.APIModels.Login.Authorization.TokenResponseModel;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using TransactionManager.Models.DBModels;

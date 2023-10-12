@@ -15,12 +15,12 @@ namespace TransactionManager.Service
 			}
 			_dbContext = dbContext;
 		}
-		public string getUserTimezone(string username)
+		public async Task<string> getUserTimezone(string username)
 		{
 			TimezoneRepository tzRepo = new TimezoneRepository(_dbContext);
-			string? userTimezone = tzRepo.getUserTimezone().Where(user => user.username == username)
+			string? userTimezone = await Task.Run(() => tzRepo.getUserTimezone().Where(user => user.username == username)
 					.Select(timezone => timezone.timezone)
-					.FirstOrDefault();
+					.FirstOrDefault());
 			if (userTimezone == null)
 			{
 				throw new InvalidDataException("Cannot find user's timezone. Please recheck DB");

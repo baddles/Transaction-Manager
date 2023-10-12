@@ -16,7 +16,8 @@
     },
     "imgur.com": {
         "authorize": {
-            "response_type": "code"
+            "response_type": "token",
+            "token_type": "Bearer"
         }
     }
 }

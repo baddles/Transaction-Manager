@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { LoginComponent } from './auth/login/login.component';
+import { ImgurCallbackComponent } from './auth/OAuth/imgur-callback.component';
+import { ImgurComponent } from './auth/OAuth/imgur.component';
 import { PagesRoutingModule } from './pages-routing.module';
-import { LoginComponent } from './login/login.component';
-import { CallbackComponent } from './login/OAuth/OAuth_Callback/callback.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatCardModule } from '@angular/material/card'
@@ -11,11 +11,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { DashboardComponent } from './main/dashboard/dashboard.component';
 import { ReportComponent } from './main/report/report.component';
 import { TransactionComponent } from './main/transaction/transaction.component';
-import { ImgurComponent } from './login/OAuth/imgur.component';
+import { AuthComponent } from './auth/auth.component';
 const componentList = [
   LoginComponent,
-  CallbackComponent,
+  ImgurCallbackComponent,
   ImgurComponent,
+  AuthComponent,
   DashboardComponent,
   ReportComponent,
   TransactionComponent
@@ -27,8 +28,7 @@ const material = [
 ]
 @NgModule({
   declarations: [
-    componentList,
-    
+    componentList,    
   ],
   exports: componentList,
   imports: [
@@ -40,3 +40,4 @@ const material = [
   ],
 })
 export class PagesModule { }
+

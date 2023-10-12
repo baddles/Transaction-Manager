@@ -17,8 +17,7 @@ namespace TransactionManager.Controllers.Login
 		{
 			_logger = logger;
 			_dbContext = dbContext;
-			_config = new ConfigurationBuilder().AddJsonFile("usersettings.json")
-			.Build();
+			_config = new ConfigurationBuilder().AddJsonFile("usersettings.json").Build();
         }
 		[HttpGet]
 		[Route("initialize")]
@@ -39,8 +38,9 @@ namespace TransactionManager.Controllers.Login
 
         [HttpPost]
 		[Route("login")]
-		public IActionResult login([FromBody] LoginRequestModel userInfo)
+		public async Task<IActionResult> login([FromBody] LoginRequestModel userInfo)
 		{
+			DateTime API_EXECUTION_TIME = DateTime.UtcNow;
 			try
 			{
                 if (!AuthenticationFacade.CheckPassword(_dbContext, userInfo.salt, userInfo.username, userInfo.encryptedPassword))
@@ -49,26 +49,21 @@ namespace TransactionManager.Controllers.Login
 					{
 						query = "SELECT * from USER where username='" + userInfo.username + "';"
 					};
-                    GenericResponseDTO<LoginRequestModel, dynamic> responseData = new GenericResponseDTO<LoginRequestModel, dynamic>(this._dbContext, HttpContext.Request.Method + " " + HttpContext.Request.Path, userInfo.salt, userInfo, StatusCodes.Status401Unauthorized, "Username or password incorrect", DateTime.UtcNow, jsonString);
+                    GenericResponseDTO<LoginRequestModel, dynamic> responseData = new GenericResponseDTO<LoginRequestModel, dynamic>(this._dbContext, HttpContext.Request.Method + " " + HttpContext.Request.Path, userInfo.salt, userInfo, StatusCodes.Status401Unauthorized, "Username or password incorrect", API_EXECUTION_TIME, jsonString);
 					return Unauthorized(responseData);
                 }
-                LoginResponseModel res = AuthorizationFacade.getAuthorizationToken(userInfo.username, userInfo.code, _dbContext, _config);
-                GenericResponseDTO<LoginRequestModel, LoginResponseModel> response = new GenericResponseDTO<LoginRequestModel, LoginResponseModel>(this._dbContext, HttpContext.Request.Method + " " + HttpContext.Request.Path, userInfo.username, userInfo, StatusCodes.Status200OK, "Success", DateTime.UtcNow, res);
+                LoginResponseModel res = await AuthorizationFacade.getAuthorizationToken(userInfo.username, API_EXECUTION_TIME, _dbContext, _config);
+                GenericResponseDTO<LoginRequestModel, LoginResponseModel> response = new GenericResponseDTO<LoginRequestModel, LoginResponseModel>(this._dbContext, HttpContext.Request.Method + " " + HttpContext.Request.Path, userInfo.username, userInfo, StatusCodes.Status200OK, "Success", API_EXECUTION_TIME, res);
                 return Ok(response);
             }
 			catch (Exception ex)
 			{
-                GenericResponseDTO<LoginRequestModel, string> error = new GenericResponseDTO<LoginRequestModel, string>(this._dbContext, HttpContext.Request.Method + " " + HttpContext.Request.Path, userInfo.salt, userInfo, StatusCodes.Status500InternalServerError, ex.Message, DateTime.UtcNow, ex.StackTrace.ToString());
+                GenericResponseDTO<LoginRequestModel, string> error = new GenericResponseDTO<LoginRequestModel, string>(this._dbContext, HttpContext.Request.Method + " " + HttpContext.Request.Path, userInfo.salt, userInfo, StatusCodes.Status500InternalServerError, ex.Message, API_EXECUTION_TIME, ex.StackTrace.ToString());
                 return StatusCode(StatusCodes.Status500InternalServerError, error);
             }
 		}
 
-		[HttpPost]
-		[Route("refresh")]
-		public IActionResult refresh([FromBody] string refresh_token)
-		{
-			return Ok("NOT IMPLEMENTED");
-		}
+		
     }
 }
 

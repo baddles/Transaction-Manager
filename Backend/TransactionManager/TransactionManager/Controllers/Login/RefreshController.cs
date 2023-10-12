@@ -19,36 +19,20 @@ namespace TransactionManager.Controllers.Login
             _dbContext = dbContext;
             _config = new ConfigurationBuilder().AddJsonFile("usersettings.json").Build();
         }
-        [HttpPost]
-        [Route("refresh_imgur_token")]
-        public IActionResult refreshImgur([FromBody] RefreshTokenRequestModel tokenInfo)
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                GenericResponseDTO<string, string> error = new GenericResponseDTO<string, string>(this._dbContext, HttpContext.Request.Method + " " + HttpContext.Request.Path, tokenInfo.username, tokenInfo.refresh_token, StatusCodes.Status500InternalServerError, ex.Message, DateTime.UtcNow, ex.StackTrace.ToString());
-                return StatusCode(StatusCodes.Status500InternalServerError, error);
-            }
-            return Unauthorized("NOT IMPLEMENTED");
-        }
 
         [HttpPost]
-        [Route("refresh_TM_token")]
+        [Route("refresh")]
         public IActionResult refreshTM([FromBody] RefreshTokenRequestModel tokenInfo)
         {
             try
             {
-
+                return Unauthorized("NOT IMPLEMENETED");
             }
             catch (Exception ex)
             {
                 GenericResponseDTO<string, string> error = new GenericResponseDTO<string, string>(this._dbContext, HttpContext.Request.Method + " " + HttpContext.Request.Path, tokenInfo.username, tokenInfo.refresh_token, StatusCodes.Status500InternalServerError, ex.Message, DateTime.UtcNow, ex.StackTrace.ToString());
                 return StatusCode(StatusCodes.Status500InternalServerError, error);
             }
-            return Unauthorized("NOT IMPLEMENETED");
         }
     }
 }

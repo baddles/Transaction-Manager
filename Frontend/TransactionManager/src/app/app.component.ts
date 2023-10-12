@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LoginComponent } from './pages/login/login.component';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 @Component({
